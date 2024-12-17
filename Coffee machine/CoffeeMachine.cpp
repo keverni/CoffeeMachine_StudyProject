@@ -12,18 +12,17 @@ CoffeeMachine::CoffeeMachine(double init_coffee, double init_milk, double init_s
 	m_ProductCards.emplace_back(ProductCard{ DrinkType::Latte,      165, 0.01, 0.1,  0.02 });
 }
 
-bool CoffeeMachine::CheckIngredients(double coffee, double milk, double sugar) const noexcept
+Result CoffeeMachine::ChoiceDrink(DrinkType drink)
 {
-	return ((m_Supplies.Sugar - sugar) >= 0 && (m_Supplies.Milk - milk) >= 0 && (m_Supplies.Coffee - coffee) >= 0);
-}
+	auto CheckBalance = [&](int money)
+	{
+		return (m_Balance - money) >= 0;
+	};
+	auto CheckIngredients = [&](double coffee, double milk, double sugar)
+	{
+		return ((m_Supplies.Sugar - sugar) >= 0 && (m_Supplies.Milk - milk) >= 0 && (m_Supplies.Coffee - coffee) >= 0);
+	};
 
-bool CoffeeMachine::CheckBalance(int money) const noexcept
-{
-	return (m_Balance - money) >= 0;
-}
-
-Result CoffeeMachine::ChoiceDrink(DrinkType&& drink)
-{
 	for (const auto& coffee : m_ProductCards)
 	{
 		if (coffee.ID == drink)

@@ -1,4 +1,3 @@
 ﻿  main.cpp
-  CoffeeMachine.cpp
-  Создание кода...
-  Coffee machine.vcxproj -> D:\Visual Studio\CoffeeMachine_StudyProject\x64\Debug\Coffee machine.exe
+  LINK : не найден или не выполнена сборка D:\Desktop\CoffeeMachine_StudyProject\x64\Debug\Coffee machine.exe при последней инкрементной компоновке; выполняется полная компоновка
+  Coffee machine.vcxproj -> D:\Desktop\CoffeeMachine_StudyProject\x64\Debug\Coffee machine.exe

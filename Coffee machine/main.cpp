@@ -2,7 +2,7 @@
 #include <string>
 #include "CoffeeMachine.h"
 
-std::string GetDrinkName(DrinkType&& type)
+std::string GetDrinkName(DrinkType type)
 {
 	if (type == DrinkType::Cappuccino)
 	{
@@ -22,7 +22,7 @@ std::string GetDrinkName(DrinkType&& type)
 
 int CinRead()
 {
-	std::string str{""};
+	std::string str{};
 	std::cin >> str;
 
 	int num{0};
@@ -33,7 +33,7 @@ int CinRead()
 	}
 	catch (const std::logic_error& )
 	{
-		//
+
 	}
 
 	return num;
@@ -53,7 +53,7 @@ int main()
 
 	CoffeeMachine machine{ 1.0, 1.0, 1.0, money };
 
-	int user_drink{0};
+	int user_drink{ 0 };
 	while (static_cast<DrinkType>(user_drink) != DrinkType::Exit)
 	{
 		std::cout << "Choose coffee (1 - Cappuccino, 2 - Raf, 3 - Latte, 4 - exit): ";
