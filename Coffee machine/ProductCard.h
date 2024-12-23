@@ -1,7 +1,5 @@
 #pragma once
 
-constexpr int INIT_VALUE{ 0 };
-
 enum class DrinkType
 {
 	Invalid,
@@ -11,20 +9,20 @@ enum class DrinkType
 	Exit,
 };
 
-struct ProductCard
+struct ProductCard final
 {
 	DrinkType ID{ DrinkType::Invalid };
-	int		  Price{ INIT_VALUE };
-	double	  Coffee{ INIT_VALUE };
-	double	  Milk{ INIT_VALUE };
-	double	  Sugar{ INIT_VALUE };
+	int		  Price{ };
+	double	  Coffee{ };
+	double	  Milk{ };
+	double	  Sugar{ };
 
-	ProductCard(DrinkType id, int price, double coffee, double milk, double sugar) :
-		ID(id),
-		Price(price),
-		Coffee(coffee),
-		Milk(milk),
-		Sugar(sugar)
+	ProductCard(DrinkType id, int price, double coffee, double milk, double sugar) noexcept :
+		ID{ id },
+		Price{ price },
+		Coffee{ coffee },
+		Milk{ milk },
+		Sugar{ sugar }
 	{
 	}
 };

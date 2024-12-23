@@ -12,10 +12,10 @@ enum class Result
 	NoProductCard,
 };
 
-class CoffeeMachine
+class CoffeeMachine final
 {
 public:
-	CoffeeMachine(double init_coffee, double init_milk, double init_sugar, int init_balance);
+	CoffeeMachine(double init_coffee, double init_milk, double init_sugar, int init_balance) noexcept;
 
 	Result ChoiceDrink(DrinkType drink);
 

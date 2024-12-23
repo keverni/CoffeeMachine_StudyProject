@@ -2,7 +2,7 @@
 #include <string>
 #include "CoffeeMachine.h"
 
-std::string GetDrinkName(DrinkType type)
+std::string GetDrinkName(DrinkType type) noexcept
 {
 	if (type == DrinkType::Cappuccino)
 	{
@@ -20,44 +20,46 @@ std::string GetDrinkName(DrinkType type)
 	return "Invalid";
 }
 
-int CinRead()
+DrinkType CinDrinkType() noexcept
 {
 	std::string str{};
 	std::cin >> str;
 
-	int num{0};
+	auto drinkType{ DrinkType::Invalid };
 
 	try
 	{
-		num = std::stoi(str);
+		drinkType = static_cast<DrinkType>(std::stoi(str));
 	}
-	catch (const std::logic_error& )
+	catch (const std::logic_error&)
 	{
-
+		// Ignore
 	}
 
-	return num;
+	return drinkType;
 }
 
-bool CheckOnValidDrink(int user_drink)
+
+bool CheckOnValidDrink(DrinkType user_drink)
 {
-	return (static_cast<DrinkType>(user_drink) < DrinkType::Exit && static_cast<DrinkType>(user_drink) > DrinkType::Invalid);
+	return user_drink < DrinkType::Exit && user_drink > DrinkType::Invalid;
 }
 
 int main()
 {
 	std::cout << "Hi! Its coffee machine! Please input money: ";
-	int money{ CinRead() };
+	auto money{ 0 };
+	std::cin >> money;
 
 	std::cout << std::endl;
 
 	CoffeeMachine machine{ 1.0, 1.0, 1.0, money };
 
-	int user_drink{ 0 };
+	auto user_drink{ DrinkType::Invalid };
 	while (static_cast<DrinkType>(user_drink) != DrinkType::Exit)
 	{
 		std::cout << "Choose coffee (1 - Cappuccino, 2 - Raf, 3 - Latte, 4 - exit): ";
-		user_drink = CinRead();
+		user_drink = CinDrinkType();
 
 		if (!CheckOnValidDrink(user_drink))
 		{
@@ -65,10 +67,10 @@ int main()
 			continue;
 		}
 
-		Result res{ machine.ChoiceDrink((DrinkType)user_drink) };
+		Result res{ machine.ChoiceDrink(user_drink) };
 		if (res == Result::OK)
 		{
-			std::cout << "Your Coffee: " << GetDrinkName((DrinkType)user_drink) << " is ready, Sir -> \n\n";
+			std::cout << "Your Coffee: " << GetDrinkName(user_drink) << " is ready, Sir -> \n\n";
 		}
 		else if (res == Result::NoMoney)
 		{
